@@ -44,7 +44,7 @@ public class Volo {
     private String tipoAereo;
 
     @ManyToOne
-    @JoinColumn(name = "TIPO_AEREO", referencedColumnName = "TIPO_AEREO")
+    @JoinColumn(name = "TIPO_AEREO", referencedColumnName = "TIPO_AEREO",  insertable = false, updatable = false)
     private Aereo aereo;
 
     @Column(name = "PASSEGGERI")

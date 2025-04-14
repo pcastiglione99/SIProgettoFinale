@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-VoliApplication<voli>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.voli.voli.VoliApplication",
+            "projectName": "voli",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
