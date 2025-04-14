@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login Amministrazione</title>
+</head>
+
+<body>
+    <div>
+        <h2>Area Amministrazione - Login</h2>
+
+        <form th:action="@{/checkLogin}" th:object="${utenteAdmin}" method="post">
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" th:field="*{username}" id="username" name="username" required autofocus>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" th:field="*{passwordHash}" id="password" name="password" required>
+            </div>
+            <div>
+                <button type="submit">Accedi</button>
+            </div>
+        </form>
+
+
+        <div>
+            <a th:href="@{/}">Torna alla ricerca voli</a>
+        </div>
+
+    </div>
+</body>
+
+</html>
