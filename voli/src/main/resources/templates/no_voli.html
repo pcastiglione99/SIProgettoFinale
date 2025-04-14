@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Nessun Volo Disponibile</title>
+</head>
+
+<body>
+
+
+        <div>
+            <h4>Nessun Volo Disponibile!</h4>
+            <p>Non sono stati trovati voli che soddisfano i criteri di ricerca:</p>
+            <ul>
+                <li th:if="${partenza}">Partenza: <strong th:text="${partenza}"></strong></li>
+                <li th:if="${arrivo}">Arrivo: <strong th:text="${arrivo}"></strong></li>
+                <li th:if="${data}">Data: <strong th:text="${#temporals.format(data, 'dd/MM/yyyy')}"></strong></li>
+            </ul>
+            <p>Verifica che ci siano posti e capacità bagaglio sufficienti per il peso indicato o prova a cercare in
+                altre date.</p>
+            <hr>
+            <a th:href="@{/}">Torna alla Home</a>
+        </div>
+
+</body>
+
+</html>

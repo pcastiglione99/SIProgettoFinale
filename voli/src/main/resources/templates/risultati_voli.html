@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Voli Disponibili</title>
+</head>
+
+<body>
+
+  <div>
+    <h1>Voli Disponibili Trovati</h1>
+
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>ID Volo</th>
+            <th>Giorno</th>
+            <th>Partenza</th>
+            <th>Ora Part.</th>
+            <th>Arrivo</th>
+            <th>Ora Arr.</th>
+            <th>Aereo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="volo : ${voli}">
+            <td th:text="${volo.idVolo}">123</td>
+            <td th:text="${#temporals.format(volo.giorno, 'dd/MM/yyyy')}">01/01/2024</td>
+            <td th:text="${volo.cittaPartenza}">Roma</td>
+            <td th:text="${#temporals.format(volo.oraPartenza, 'HH:mm')}">10:00</td>
+            <td th:text="${volo.cittaArrivo}">Parigi</td>
+            <td th:text="${#temporals.format(volo.oraArrivo, 'HH:mm')}">12:00</td>
+            <td th:text="${volo.tipoAereo}">B737</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+      <a th:href="@{/home}">Nuova Ricerca</a>
+    </div>
+  </div>
+</body>
+
+</html>
