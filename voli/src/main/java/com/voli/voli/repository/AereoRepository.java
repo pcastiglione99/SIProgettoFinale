@@ -1,5 +1,9 @@
 package com.voli.voli.repository;
 
-public class AereoRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.voli.voli.model.Aereo;
+
+public interface AereoRepository extends JpaRepository<Aereo, String>{
 
 }

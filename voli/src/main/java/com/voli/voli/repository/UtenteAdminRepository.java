@@ -1,5 +1,9 @@
 package com.voli.voli.repository;
 
-public class UtenteAdminRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.voli.voli.model.UtenteAdmin;
+
+public interface UtenteAdminRepository extends JpaRepository<UtenteAdmin, Integer>{
 
 }
