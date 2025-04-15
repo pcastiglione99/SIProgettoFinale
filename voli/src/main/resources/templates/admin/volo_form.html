@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Form Volo</title>
+</head>
+
+<body>
+    <h1>Form Volo</h1>
+
+    <div>
+        <form th:if="${!isModifica}" th:action="@{/admin/voli/salva}" th:object="${volo}" method="post">
+            <h5>Inserisci Volo</h5>
+            <div>
+                <label for="cittaPartenza">Aeroporto di Partenza:</label>
+                <select th:field="*{cittaPartenza}" required>
+                    <option value="">Seleziona...</option>
+                    <option th:each="a : ${aeroporti}" th:value="${a.citta}"
+                        th:text="${a.citta + ' (' + a.nazione + ')'}">
+                    </option>
+                </select>
+            </div>
+
+            <div>
+                <label for="cittaArrivo">Aeroporto di Arrivo:</label>
+                <select th:field="*{cittaArrivo}" required>
+                    <option value="">Seleziona...</option>
+                    <option th:each="a : ${aeroporti}" th:value="${a.citta}"
+                        th:text="${a.citta + ' (' + a.nazione + ')'}">
+                    </option>
+                </select>
+            </div>
+
+            <div>
+                <label for="data">Data Partenza (o successiva):</label>
+                <input type="date" th:field="*{giorno}" value="2017-01-01" min="2017-01-01"  required>
+            </div>
+
+            <div>
+                <label for="tipoAereo">Tipo Aereo</label>
+                <select th:field="*{tipoAereo}" required>
+                    <option value="">Seleziona...</option>
+                    <option th:each="t : ${tipiAereo}" th:value="${t.tipoAereo}" 
+                        th:text="${t.tipoAereo}">
+                    </option>
+                </select>
+            </div>
+
+            <div>
+                <button type="submit">Aggiungi Volo</button>
+            </div>
+        </form>
+    </div>
+
+    <div>
+        <form th:if="${isModifica}" th:action="@{/admin/voli/modifica}" method="post">
+            <input type="hidden" name="idVolo" th:value="${volo.idVolo}">
+            <h5>Modifica tipo aereo per volo ID: <span th:text="${volo.idVolo}"></span></h5>
+            <div>
+                <label for="cittaPartenza">Aeroporto di Partenza:</label>
+                <input type="text" readonly th:value="${volo.cittaPartenza}">
+            </div>
+            <div>
+                <label for="cittaArrivo">Aeroporto di Arrivo:</label>
+                <input type="text" readonly th:value="${volo.cittaArrivo}">
+            </div>
+
+            <div>
+                <label for="data">Data Partenza (o successiva):</label>
+                <input type="date" readonly th:value="${volo.giorno}">
+            </div>
+
+            <div>
+                <label for="tipoAereo">Tipo Aereo</label>
+                <select id="tipoAereo" name="tipoAereo" required>
+                    <option value="">Seleziona Nuovo Aereo...</option>
+                    <option th:each="a: ${tipiAereo}"
+                            th:value="${a.tipoAereo}"
+                            th:text="${a.tipoAereo + ' (Pass: ' + a.numPass + ', Merci: ' + a.qtaMerci + ' Kg)'}"
+                            th:selected="${a.tipoAereo == volo.tipoAereo}"></option>
+                </select>
+            </div>
+
+            <div>
+                <button type="submit">Modifica Volo</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+
+</html>

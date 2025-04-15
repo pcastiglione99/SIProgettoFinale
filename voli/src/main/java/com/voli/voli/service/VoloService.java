@@ -25,6 +25,10 @@ public class VoloService {
     @Autowired
     private AereoRepository aereoRepository;
 
+    public Optional<Volo> findVoloById(Integer idVolo){
+        return voloRepository.findById(idVolo);
+    }
+
     public List<Volo> cercaVoliFuturi(LocalDate giorno) {
         return voloRepository.cercaVoliSuccessiviGiorno(giorno);
     }
@@ -77,7 +81,7 @@ public class VoloService {
                 return false;
             }
 
-            volo.setAereo(aereo);
+            volo.setTipoAereo(nuovoTipoAereo);
             voloRepository.save(volo);
             return true;
 
@@ -85,7 +89,11 @@ public class VoloService {
 
         return false;
 
+    }
 
+    public void cancellaVolo(Integer idVolo){
+        Volo volo = voloRepository.getReferenceById(idVolo);
+        voloRepository.delete(volo);
     }
     
 
