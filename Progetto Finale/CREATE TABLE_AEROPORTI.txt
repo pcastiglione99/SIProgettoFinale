@@ -1,0 +1,38 @@
+
+----------------------------------------------------
+-- Create Table AEROPORTI
+----------------------------------------------------
+CREATE TABLE AEROPORTI
+(
+ ID_AEROPORTO        INTEGER PRIMARY KEY
+,CITTA               VARCHAR(30)
+,NAZIONE             VARCHAR(30)
+,NUM_PISTE           INTEGER 
+);
+
+----------------------------------------------------
+-- Create Table VOLI 
+----------------------------------------------------
+CREATE TABLE VOLI 
+(
+ ID_VOLO           INTEGER PRIMARY KEY
+,GIORNO            VARCHAR(50)
+,CITTA_PARTENZA    VARCHAR(50)
+,ORA_PARTENZA      VARCHAR(50)
+,CITTA_ARRIVO      VARCHAR(50)
+,ORA_ARRIVO        VARCHAR(50)
+,TIPO_AEREO        CHAR(5)
+, PASSEGGERI 	   INTEGER
+, MERCI		   INTEGER
+);
+
+----------------------------------------------------
+-- Create Table AEREO
+----------------------------------------------------
+CREATE TABLE AEREO
+(
+ TIPO_AEREO        CHAR(5) PRIMARY KEY
+,NUM_PASS          INTEGER
+,QTA_MERCI         INTEGER
+);
+
