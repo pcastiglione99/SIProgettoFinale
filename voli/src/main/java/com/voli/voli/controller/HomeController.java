@@ -12,12 +12,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.voli.voli.model.Aeroporto;
 import com.voli.voli.model.Volo;
 import com.voli.voli.service.AeroportoService;
+import com.voli.voli.service.UtenteAdminService;
 import com.voli.voli.service.VoloService;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
 @Controller
 public class HomeController {
+
+    @Autowired
+    private UtenteAdminService utenteAdminService;
 
     @Autowired
     private VoloService voloService;
@@ -51,16 +58,27 @@ public class HomeController {
             model.addAttribute("cittaPartenza", cittaPartenza);
             model.addAttribute("cittaArrivo", cittaArrivo);
             model.addAttribute("data", data);
-            return "no_voli";
+            return "noVoli";
 
         }
         model.addAttribute("voli", results);
-        return "risultati_voli";
+        return "risultatiVoli";
     }
     
     @GetMapping("/login")
     public String loginPage() {
         return "login";
     }
+    @PostMapping("/checkLogin")
+    public String checkLogin(@RequestParam("username") String username, @RequestParam("password") String password, Model model) {
+
+        if(utenteAdminService.checkLogin(username, password)){
+            model.addAttribute("username", username);
+            return "/admin/dashboard";
+        }
+
+        return "login";
+    }
+    
     
 }

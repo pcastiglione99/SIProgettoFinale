@@ -33,6 +33,13 @@ public class AdminController {
     @Autowired
     private AeroportoService aeroportoService;
 
+
+    @GetMapping("/dashboard")
+    public String dashBoard() {
+        return "admin/dashboard";
+    }
+    
+
     @GetMapping("/voli/report")
     public String getFutureFlights(
             Model model,
