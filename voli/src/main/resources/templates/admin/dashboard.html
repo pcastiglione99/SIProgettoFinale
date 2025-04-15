@@ -4,22 +4,25 @@
 <head>
   <meta charset="UTF-8">
   <title>Admin - Dashboard</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
 </head>
 
+
+
 <body>
-  <nav>
-    <ul>
-      <li><a th:href="@{/admin/voli/report}">Report Voli</a></li>
-      <li><a th:href="@{/admin/voli/nuovo}">Nuovo Volo</a></li>
+  <nav class="navbar">
+    <ul class="nav-list">
+      <li class="nav-item"><a th:href="@{/admin/dashboard}" class="nav-link">Home</a></li>
     </ul>
   </nav>
 
-  <h1 th:text="'Benvenuto ' + ${username}"></h1>
-  <div>
-    <a th:href="@{/admin/voli/report}">
+  <h1 class="title" th:text="'Benvenuto ' + ${username}"></h1>
+
+  <div class="container link-container">
+    <a th:href="@{/admin/voli/report}" class="link-box">
       Visualizza Report Voli Futuri
     </a>
-    <a th:href="@{/admin/voli/nuovo}">
+    <a th:href="@{/admin/voli/nuovo}" class="link-box">
       Inserisci Nuovo Volo
     </a>
   </div>

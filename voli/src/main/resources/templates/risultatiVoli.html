@@ -4,11 +4,18 @@
 <head>
   <meta charset="UTF-8">
   <title>Voli Disponibili</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
 </head>
 
 <body>
+  <nav class="navbar">
+    <ul class="nav-list">
+      <li class="nav-item"><a href="" class="nav-link">Home</a></li>
+      <li class="nav-item"><a th:href="@{/login}" class="nav-link">LogIn</a></li>
+    </ul>
+  </nav>
 
-  <div>
+  <div class="container">
     <h1>Voli Disponibili Trovati</h1>
 
     <div>

@@ -4,17 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Compagnia Aerea - Prenotazione Voli</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
 </head>
 
 <body>
-    <nav>
-        <ul>
-            <li><a href="">Logo</a></li>
-            <li><a th:href="@{/login}">LogIn</a></li>
+    <nav class="navbar">
+        <ul class="nav-list">
+            <li class="nav-item"><a href="" class="nav-link">Home</a></li>
+            <li class="nav-item"><a th:href="@{/login}" class="nav-link">LogIn</a></li>
         </ul>
     </nav>
 
-    <div>
+    <div class="container">
         <h1>Cerca il tuo volo</h1>
         <form th:action="@{/cerca}">
             <div>
@@ -43,10 +44,10 @@
             <div>
                 <label for="pesoBagaglio">Peso Bagalgio (Kg)</label>
                 <input type="number" id="pesoBagaglio" name="pesoBagaglio" value="0" min="0" step="1" required>
-            </div> 
+            </div>
 
             <div>
-                <button type="submit">Cerca Voli</button>
+                <button type="submit" class="btn">Cerca Voli</button>
             </div>
 
         </form>

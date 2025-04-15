@@ -65,7 +65,7 @@ public class AdminController {
         return "redirect:/admin/voli/report";
     }
 
-    @PostMapping("/voli/cancella/{id}")
+    @PostMapping("/voli/cancella/{id:\\d+}")
     public String cancellaVolo(@PathVariable("id") Integer idVolo) {
         System.out.println(idVolo);
 
@@ -74,7 +74,7 @@ public class AdminController {
         return "redirect:/admin/voli/report";
     }
 
-    @GetMapping("/voli/modifica/{id}")
+    @GetMapping("/voli/modifica/{id:\\d+}")
     public String modificaVoloForm(@PathVariable("id") Integer idVolo, Model model) {
         Optional<Volo> voloOpt = voloService.findVoloById(idVolo);
         if (voloOpt.isPresent()) {

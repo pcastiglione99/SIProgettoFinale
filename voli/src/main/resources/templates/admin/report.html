@@ -4,11 +4,17 @@
 <head>
   <meta charset="UTF-8">
   <title>Admin - Report Voli</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
 </head>
 
 <body>
+  <nav class="navbar">
+    <ul class="nav-list">
+      <li class="nav-item"><a th:href="@{/admin/dashboard}" class="nav-link">Home</a></li>
+    </ul>
+  </nav>
 
-  <div>
+  <div class="container">
     <h1>Report Voli Futuri</h1>
 
     <div>
@@ -38,12 +44,12 @@
             <td th:text="${volo.tipoAereo}">B737</td>
             <td th:text="${volo.passeggeri}">12</td>
             <td th:text="${volo.merci}">20</td>
-            <td>
-              <form th:action="@{/admin/voli/cancella/{id}(id=${volo.idVolo})}", method="post">
-                <button type="submit">Cancella</button>
+            <td class="action-buttons">
+              <form th:action="@{/admin/voli/cancella/{id}(id=${volo.idVolo})}" , method="post">
+                <button type="submit" class="btn">Cancella</button>
               </form>
-              <form th:action="@{/admin/voli/modifica/{id}(id=${volo.idVolo})}", method="get">
-                <button type="submit">Modifica</button>
+              <form th:action="@{/admin/voli/modifica/{id}(id=${volo.idVolo})}" , method="get">
+                <button type="submit" class="btn">Modifica</button>
               </form>
             </td>
           </tr>

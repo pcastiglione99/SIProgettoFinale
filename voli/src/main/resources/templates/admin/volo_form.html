@@ -4,14 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin - Form Volo</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
 </head>
 
 <body>
-    <h1>Form Volo</h1>
+    <nav class="navbar">
+        <ul class="nav-list">
+            <li class="nav-item"><a th:href="@{/admin/dashboard}" class="nav-link">Home</a></li>
+        </ul>
+    </nav>
 
-    <div>
-        <form th:if="${!isModifica}" th:action="@{/admin/voli/salva}" th:object="${volo}" method="post">
-            <h5>Inserisci Volo</h5>
+    <div th:if="${!isModifica}" class="container">
+        <form th:action="@{/admin/voli/salva}" th:object="${volo}" method="post">
+            <h1>Inserisci nuovo Volo</h1>
             <div>
                 <label for="cittaPartenza">Aeroporto di Partenza:</label>
                 <select th:field="*{cittaPartenza}" required>
@@ -33,16 +38,16 @@
             </div>
 
             <div>
-                <label for="data">Data Partenza (o successiva):</label>
+                <label for="data">Data Partenza</label>
                 <input type="date" th:field="*{giorno}" value="2017-01-01" min="2017-01-01" required>
             </div>
 
-            <div class="col-md-6">
-                <label for="oraPartenza" class="form-label">Ora Partenza:</label>
+            <div>
+                <label for="oraPartenza">Ora Partenza:</label>
                 <input type="datetime-local" th:field="*{oraPartenza}" class="form-control" required>
             </div>
-            <div class="col-md-6">
-                <label for="oraArrivo" class="form-label">Ora Arrivo:</label>
+            <div>
+                <label for="oraArrivo">Ora Arrivo:</label>
                 <input type="datetime-local" th:field="*{oraArrivo}" class="form-control" required>
             </div>
 
@@ -56,26 +61,28 @@
             </div>
 
             <div>
-                <button type="submit">Aggiungi Volo</button>
+                <button type="submit" class="btn">Aggiungi Volo</button>
             </div>
         </form>
     </div>
 
-    <div>
-        <form th:if="${isModifica}" th:action="@{/admin/voli/modifica}" method="post">
+    <div th:if="${isModifica}" class="container">
+        <form th:action="@{/admin/voli/modifica}" method="post">
             <input type="hidden" name="idVolo" th:value="${volo.idVolo}">
-            <h5>Modifica tipo aereo per volo ID: <span th:text="${volo.idVolo}"></span></h5>
+            <h1>Modifica tipo aereo per volo ID: <span th:text="${volo.idVolo}"></span></h1>
+
             <div>
                 <label for="cittaPartenza">Aeroporto di Partenza:</label>
                 <input type="text" readonly th:value="${volo.cittaPartenza}">
             </div>
+
             <div>
                 <label for="cittaArrivo">Aeroporto di Arrivo:</label>
                 <input type="text" readonly th:value="${volo.cittaArrivo}">
             </div>
 
             <div>
-                <label for="data">Data Partenza (o successiva):</label>
+                <label for="data">Data Partenza</label>
                 <input type="date" readonly th:value="${volo.giorno}">
             </div>
 
@@ -90,7 +97,7 @@
             </div>
 
             <div>
-                <button type="submit">Modifica Volo</button>
+                <button type="submit" class="btn">Modifica Volo</button>
             </div>
         </form>
     </div>
