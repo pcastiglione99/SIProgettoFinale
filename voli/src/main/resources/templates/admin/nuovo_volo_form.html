@@ -10,10 +10,10 @@
     <h1>Inserisci Nuovo Volo</h1>
 
     <div>
-        <form th:action="@{/voli/salva}">
+        <form th:action="@{/admin/voli/salva}" th:object="${volo}" method="post">
             <div>
                 <label for="cittaPartenza">Aeroporto di Partenza:</label>
-                <select id="cittaPartenza" name="cittaPartenza" required>
+                <select th:field="*{cittaPartenza}" required>
                     <option value="">Seleziona...</option>
                     <option th:each="a : ${aeroporti}" th:value="${a.citta}"
                         th:text="${a.citta + ' (' + a.nazione + ')'}">
@@ -23,7 +23,7 @@
 
             <div>
                 <label for="cittaArrivo">Aeroporto di Arrivo:</label>
-                <select id="cittaArrivo" name="cittaArrivo" required>
+                <select th:field="*{cittaArrivo}" required>
                     <option value="">Seleziona...</option>
                     <option th:each="a : ${aeroporti}" th:value="${a.citta}"
                         th:text="${a.citta + ' (' + a.nazione + ')'}">
@@ -33,12 +33,12 @@
 
             <div>
                 <label for="data">Data Partenza (o successiva):</label>
-                <input type="date" id="data" name="data" value="2017-01-01" min="2017-01-01" required>
+                <input type="date" th:field="*{giorno}" value="2017-01-01" min="2017-01-01"  required>
             </div>
 
             <div>
                 <label for="tipoAereo">Tipo Aereo</label>
-                <select id="tipoAereo" name="tipoAereo" required>
+                <select th:field="*{tipoAereo}" required>
                     <option value="">Seleziona...</option>
                     <option th:each="t : ${tipi_aereo}" th:value="${t.tipoAereo}" 
                         th:text="${t.tipoAereo}">

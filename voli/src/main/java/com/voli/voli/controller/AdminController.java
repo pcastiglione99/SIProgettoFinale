@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -15,7 +16,6 @@ import com.voli.voli.model.Volo;
 import com.voli.voli.service.AereoService;
 import com.voli.voli.service.AeroportoService;
 import com.voli.voli.service.VoloService;
-import org.springframework.web.bind.annotation.PostMapping;
 
 
 
@@ -49,7 +49,7 @@ public class AdminController {
 
     @GetMapping("/voli/nuovo")
     public String nuovoVoloForm(Model model) {
-        model.addAttribute("nuovo_volo", new Volo());
+        model.addAttribute("volo", new Volo());
         model.addAttribute("aeroporti", aeroportoService.getAeroportiOrdinati());
         model.addAttribute("tipi_aereo", aereoService.getTipiAereoOrdinati());
         return "admin/nuovo_volo_form";
@@ -57,10 +57,8 @@ public class AdminController {
 
     @PostMapping("/voli/salva")
     public String salvaVolo(@ModelAttribute("volo") Volo volo) {
-
-
-        
-        return "admin/report";
+        voloService.aggiungiVolo(volo);
+        return "/admin/voli/report";
     }
     
     
