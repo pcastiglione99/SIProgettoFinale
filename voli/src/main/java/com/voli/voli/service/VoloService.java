@@ -15,17 +15,16 @@ import com.voli.voli.repository.VoloRepository;
 
 import jakarta.transaction.Transactional;
 
-
 @Service
 public class VoloService {
 
     @Autowired
     private VoloRepository voloRepository;
-    
+
     @Autowired
     private AereoRepository aereoRepository;
 
-    public Optional<Volo> findVoloById(Integer idVolo){
+    public Optional<Volo> findVoloById(Integer idVolo) {
         return voloRepository.findById(idVolo);
     }
 
@@ -33,15 +32,20 @@ public class VoloService {
         return voloRepository.cercaVoliSuccessiviGiorno(giorno);
     }
 
+    public List<Volo> filtraVoli(LocalDate data, String partenza, String destinazione) {
+        return voloRepository.findByFiltri(data, partenza, destinazione);
+    }
 
-    public List<Volo> cercaVoliDisponibili(String cittaPartenza, String cittaArrivo, LocalDate giorno, int pesoBagaglio) {
+    public List<Volo> cercaVoliDisponibili(String cittaPartenza, String cittaArrivo, LocalDate giorno,
+            int pesoBagaglio) {
 
-            List<Volo> results = voloRepository.cercaVoli(cittaPartenza, cittaArrivo, giorno);
+        List<Volo> results = voloRepository.cercaVoli(cittaPartenza, cittaArrivo, giorno);
 
-            return results.stream()
+        return results.stream()
                 .filter(volo -> {
                     Aereo aereo = volo.getAereo();
-                    if (aereo == null) return false; // Sicurezza: se aereo non trovato, scarta
+                    if (aereo == null)
+                        return false; // Sicurezza: se aereo non trovato, scarta
 
                     boolean postiOk = volo.getPasseggeri() < aereo.getNumPass();
                     boolean bagaglioOk = (volo.getMerci() + pesoBagaglio) <= aereo.getQtaMerci();
@@ -51,9 +55,8 @@ public class VoloService {
 
     }
 
-
     @Transactional
-    public void aggiungiVolo(Volo nuovoVolo){
+    public void aggiungiVolo(Volo nuovoVolo) {
 
         nuovoVolo.setPasseggeri(0);
         nuovoVolo.setMerci(0);
@@ -63,20 +66,20 @@ public class VoloService {
     }
 
     @Transactional
-    public boolean modificaTipoAereo(int idAereo, String nuovoTipoAereo){
+    public boolean modificaTipoAereo(int idAereo, String nuovoTipoAereo) {
         Optional<Volo> voloOpt = voloRepository.findById(idAereo);
         Optional<Aereo> aereoOpt = aereoRepository.findById(nuovoTipoAereo);
 
-        if(voloOpt.isPresent() && aereoOpt.isPresent()){
+        if (voloOpt.isPresent() && aereoOpt.isPresent()) {
 
             Volo volo = voloOpt.get();
             Aereo aereo = aereoOpt.get();
 
-            if(volo.getPasseggeri() > aereo.getNumPass() ){
+            if (volo.getPasseggeri() > aereo.getNumPass()) {
                 System.err.println("Errore: Il nuovo aereo non ha capacità passeggeri sufficiente");
                 return false;
             }
-            if(volo.getMerci() > aereo.getQtaMerci() ){
+            if (volo.getMerci() > aereo.getQtaMerci()) {
                 System.err.println("Errore: Il nuovo aereo non ha capacità merci sufficiente");
                 return false;
             }
@@ -91,10 +94,9 @@ public class VoloService {
 
     }
 
-    public void cancellaVolo(Integer idVolo){
+    public void cancellaVolo(Integer idVolo) {
         Volo volo = voloRepository.getReferenceById(idVolo);
         voloRepository.delete(volo);
     }
-    
 
 }

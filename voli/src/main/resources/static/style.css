@@ -78,6 +78,20 @@ h1, h2, h3 {
 
 /* ====== FORM ====== */
 
+.filter-form {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .filter-form label {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+  }
+
 .form-row {
     display: flex;
     gap: 20px;

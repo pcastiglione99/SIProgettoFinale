@@ -39,7 +39,7 @@ public class AdminController {
         return "admin/dashboard";
     }
     
-
+/*
     @GetMapping("/voli/report")
     public String getFutureFlights(
             Model model,
@@ -48,7 +48,24 @@ public class AdminController {
         List<Volo> voliFuturi = voloService.cercaVoliFuturi(data);
         model.addAttribute("voliFuturi", voliFuturi);
         return "admin/report";
+    }*/
+
+    @GetMapping("/voli/report")
+    public String getFutureFlights(
+            Model model,
+            @RequestParam(name = "data", required = false) LocalDate data,
+            @RequestParam(name = "cittaPartenza", required = false) String partenza,
+            @RequestParam(name = "cittaArrivo", required = false) String destinazione) {
+
+        List<Volo> voliFuturi = voloService.filtraVoli(data, partenza, destinazione);
+        model.addAttribute("aeroporti", aeroportoService.getAeroportiOrdinati());
+        model.addAttribute("voliFuturi", voliFuturi);
+        return "admin/report";
     }
+
+
+
+
 
     @GetMapping("/voli/nuovo")
     public String nuovoVoloForm(Model model) {

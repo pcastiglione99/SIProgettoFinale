@@ -17,6 +17,42 @@
   <div class="container">
     <h1>Report Voli Futuri</h1>
 
+    <form th:action="@{/admin/voli/report}" method="get" class="filter-form">
+      <div class="form-row">
+
+        <div class="form-group">
+          <label for="cittaPartenza">Partenza:</label>
+          <select id="cittaPartenza" name="cittaPartenza">
+            <option value="">Seleziona...</option>
+            <option th:each="a : ${aeroporti}" th:value="${a.citta}" th:text="${a.citta + ' (' + a.nazione + ')'}"
+              th:selected="${a.citta == param.cittaPartenza}">
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="cittaArrivo">Arrivo:</label>
+          <select id="cittaArrivo" name="cittaArrivo">
+            <option value="">Seleziona...</option>
+            <option th:each="a : ${aeroporti}" th:value="${a.citta}" th:text="${a.citta + ' (' + a.nazione + ')'}"
+              th:selected="${a.citta == param.cittaArrivo}">
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="data">Data:</label>
+          <input type="date" id="data" name="data" th:value="${param.data}" />
+        </div>
+
+        <div class="form-group button-group">
+          <label>&nbsp;</label>
+          <button type="submit" class="btn">Cerca</button>
+        </div>
+
+      </div>
+    </form>
+
     <div>
       <table>
         <thead>
