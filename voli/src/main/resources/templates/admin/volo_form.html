@@ -34,15 +34,23 @@
 
             <div>
                 <label for="data">Data Partenza (o successiva):</label>
-                <input type="date" th:field="*{giorno}" value="2017-01-01" min="2017-01-01"  required>
+                <input type="date" th:field="*{giorno}" value="2017-01-01" min="2017-01-01" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="oraPartenza" class="form-label">Ora Partenza:</label>
+                <input type="datetime-local" th:field="*{oraPartenza}" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+                <label for="oraArrivo" class="form-label">Ora Arrivo:</label>
+                <input type="datetime-local" th:field="*{oraArrivo}" class="form-control" required>
             </div>
 
             <div>
                 <label for="tipoAereo">Tipo Aereo</label>
                 <select th:field="*{tipoAereo}" required>
                     <option value="">Seleziona...</option>
-                    <option th:each="t : ${tipiAereo}" th:value="${t.tipoAereo}" 
-                        th:text="${t.tipoAereo}">
+                    <option th:each="t : ${tipiAereo}" th:value="${t.tipoAereo}" th:text="${t.tipoAereo}">
                     </option>
                 </select>
             </div>
@@ -75,10 +83,9 @@
                 <label for="tipoAereo">Tipo Aereo</label>
                 <select id="tipoAereo" name="tipoAereo" required>
                     <option value="">Seleziona Nuovo Aereo...</option>
-                    <option th:each="a: ${tipiAereo}"
-                            th:value="${a.tipoAereo}"
-                            th:text="${a.tipoAereo + ' (Pass: ' + a.numPass + ', Merci: ' + a.qtaMerci + ' Kg)'}"
-                            th:selected="${a.tipoAereo == volo.tipoAereo}"></option>
+                    <option th:each="a: ${tipiAereo}" th:value="${a.tipoAereo}"
+                        th:text="${a.tipoAereo + ' (Pass: ' + a.numPass + ', Merci: ' + a.qtaMerci + ' Kg)'}"
+                        th:selected="${a.tipoAereo == volo.tipoAereo}"></option>
                 </select>
             </div>
 

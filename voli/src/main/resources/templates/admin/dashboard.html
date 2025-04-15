@@ -7,8 +7,22 @@
 </head>
 
 <body>
+  <nav>
+    <ul>
+      <li><a th:href="@{/admin/voli/report}">Report Voli</a></li>
+      <li><a th:href="@{/admin/voli/nuovo}">Nuovo Volo</a></li>
+    </ul>
+  </nav>
 
   <h1 th:text="'Benvenuto ' + ${username}"></h1>
+  <div>
+    <a th:href="@{/admin/voli/report}">
+      Visualizza Report Voli Futuri
+    </a>
+    <a th:href="@{/admin/voli/nuovo}">
+      Inserisci Nuovo Volo
+    </a>
+  </div>
 </body>
 
 </html>

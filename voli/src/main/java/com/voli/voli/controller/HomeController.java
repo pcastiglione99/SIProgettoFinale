@@ -15,7 +15,6 @@ import com.voli.voli.service.AeroportoService;
 import com.voli.voli.service.UtenteAdminService;
 import com.voli.voli.service.VoloService;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 
