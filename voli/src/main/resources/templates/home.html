@@ -10,7 +10,7 @@
 <body>
     <nav class="navbar">
         <ul class="nav-list">
-            <li class="nav-item"><a href="" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
             <li class="nav-item"><a th:href="@{/login}" class="nav-link">LogIn</a></li>
         </ul>
     </nav>
@@ -18,37 +18,41 @@
     <div class="container">
         <h1>Cerca il tuo volo</h1>
         <form th:action="@{/cerca}">
-            <div>
-                <label for="cittaPartenza">Aeroporto di Partenza:</label>
-                <select id="cittaPartenza" name="cittaPartenza" required>
-                    <option value="">Seleziona...</option>
-                    <option th:each="a : ${aeroporti}" th:value="${a.citta}"
-                        th:text="${a.citta + ' (' + a.nazione + ')'}"></option>
-                </select>
+            <div class="form-row">
+                <div>
+                    <label for="cittaPartenza">Aeroporto di Partenza:</label>
+                    <select id="cittaPartenza" name="cittaPartenza" required>
+                        <option value="">Seleziona...</option>
+                        <option th:each="a : ${aeroporti}" th:value="${a.citta}"
+                            th:text="${a.citta + ' (' + a.nazione + ')'}"></option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="cittaArrivo">Aeroporto di Arrivo:</label>
+                    <select id="cittaArrivo" name="cittaArrivo" required>
+                        <option value="">Seleziona...</option>
+                        <option th:each="a : ${aeroporti}" th:value="${a.citta}"
+                            th:text="${a.citta + ' (' + a.nazione + ')'}"></option>
+                    </select>
+                </div>
             </div>
 
-            <div>
-                <label for="cittaArrivo">Aeroporto di Arrivo:</label>
-                <select id="cittaArrivo" name="cittaArrivo" required>
-                    <option value="">Seleziona...</option>
-                    <option th:each="a : ${aeroporti}" th:value="${a.citta}"
-                        th:text="${a.citta + ' (' + a.nazione + ')'}"></option>
-                </select>
-            </div>
+            <div class="form-row">
+                <div>
+                    <label for="data">Data Partenza (o successiva):</label>
+                    <input type="date" id="data" name="data" value="2017-01-01" min="2017-01-01" required>
+                </div>
 
-            <div>
-                <label for="data">Data Partenza (o successiva):</label>
-                <input type="date" id="data" name="data" value="2017-01-01" min="2017-01-01" required>
-            </div>
+                <div>
+                    <label for="pesoBagaglio">Peso Bagalgio (Kg)</label>
+                    <input type="number" id="pesoBagaglio" name="pesoBagaglio" value="0" min="0" step="1" required>
+                </div>
 
-            <div>
-                <label for="pesoBagaglio">Peso Bagalgio (Kg)</label>
-                <input type="number" id="pesoBagaglio" name="pesoBagaglio" value="0" min="0" step="1" required>
             </div>
-
-            <div class="button-container">
-                <button type="submit" class="btn">Cerca Voli</button>
-            </div>
+                <div class="button-container">
+                    <button type="submit" class="btn">Cerca Voli</button>
+                </div>
 
         </form>
 

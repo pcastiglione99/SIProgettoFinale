@@ -77,6 +77,17 @@ h1, h2, h3 {
 }
 
 /* ====== FORM ====== */
+
+.form-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.form-row > div {
+    flex: 1;
+}
+
 .search-form {
     display: flex;
     flex-direction: column;

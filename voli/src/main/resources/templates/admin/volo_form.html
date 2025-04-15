@@ -17,48 +17,55 @@
     <div th:if="${!isModifica}" class="container">
         <form th:action="@{/admin/voli/salva}" th:object="${volo}" method="post">
             <h1>Inserisci nuovo Volo</h1>
-            <div>
-                <label for="cittaPartenza">Aeroporto di Partenza:</label>
-                <select th:field="*{cittaPartenza}" required>
-                    <option value="">Seleziona...</option>
-                    <option th:each="a : ${aeroporti}" th:value="${a.citta}"
-                        th:text="${a.citta + ' (' + a.nazione + ')'}">
-                    </option>
-                </select>
+            <div class="form-row">
+                <div>
+                    <label for="cittaPartenza">Aeroporto di Partenza:</label>
+                    <select th:field="*{cittaPartenza}" required>
+                        <option value="">Seleziona...</option>
+                        <option th:each="a : ${aeroporti}" th:value="${a.citta}"
+                            th:text="${a.citta + ' (' + a.nazione + ')'}">
+                        </option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="cittaArrivo">Aeroporto di Arrivo:</label>
+                    <select th:field="*{cittaArrivo}" required>
+                        <option value="">Seleziona...</option>
+                        <option th:each="a : ${aeroporti}" th:value="${a.citta}"
+                            th:text="${a.citta + ' (' + a.nazione + ')'}">
+                        </option>
+                    </select>
+                </div>
             </div>
 
-            <div>
-                <label for="cittaArrivo">Aeroporto di Arrivo:</label>
-                <select th:field="*{cittaArrivo}" required>
-                    <option value="">Seleziona...</option>
-                    <option th:each="a : ${aeroporti}" th:value="${a.citta}"
-                        th:text="${a.citta + ' (' + a.nazione + ')'}">
-                    </option>
-                </select>
+            <div class="form-row">
+                <div>
+                    <label for="data">Data Partenza</label>
+                    <input type="date" th:field="*{giorno}" value="2017-01-01" min="2017-01-01" required>
+                </div>
+
+                <div>
+                    <label for="oraPartenza">Ora Partenza:</label>
+                    <input type="datetime-local" th:field="*{oraPartenza}" class="form-control" required>
+                </div>
+                <div>
+                    <label for="oraArrivo">Ora Arrivo:</label>
+                    <input type="datetime-local" th:field="*{oraArrivo}" class="form-control" required>
+                </div>
+
+            </div>
+            <div class="form-row">
+                <div>
+                    <label for="tipoAereo">Tipo Aereo</label>
+                    <select th:field="*{tipoAereo}" required>
+                        <option value="">Seleziona...</option>
+                        <option th:each="t : ${tipiAereo}" th:value="${t.tipoAereo}" th:text="${t.tipoAereo}">
+                        </option>
+                    </select>
+                </div>
             </div>
 
-            <div>
-                <label for="data">Data Partenza</label>
-                <input type="date" th:field="*{giorno}" value="2017-01-01" min="2017-01-01" required>
-            </div>
-
-            <div>
-                <label for="oraPartenza">Ora Partenza:</label>
-                <input type="datetime-local" th:field="*{oraPartenza}" class="form-control" required>
-            </div>
-            <div>
-                <label for="oraArrivo">Ora Arrivo:</label>
-                <input type="datetime-local" th:field="*{oraArrivo}" class="form-control" required>
-            </div>
-
-            <div>
-                <label for="tipoAereo">Tipo Aereo</label>
-                <select th:field="*{tipoAereo}" required>
-                    <option value="">Seleziona...</option>
-                    <option th:each="t : ${tipiAereo}" th:value="${t.tipoAereo}" th:text="${t.tipoAereo}">
-                    </option>
-                </select>
-            </div>
 
             <div class="button-container">
                 <button type="submit" class="btn">Aggiungi Volo</button>
@@ -71,29 +78,35 @@
             <input type="hidden" name="idVolo" th:value="${volo.idVolo}">
             <h1>Modifica tipo aereo per volo ID: <span th:text="${volo.idVolo}"></span></h1>
 
-            <div>
-                <label for="cittaPartenza">Aeroporto di Partenza:</label>
-                <input type="text" readonly th:value="${volo.cittaPartenza}">
-            </div>
+            <div class="form-row">
+                <div>
+                    <label for="cittaPartenza">Aeroporto di Partenza:</label>
+                    <input type="text" readonly th:value="${volo.cittaPartenza}">
+                </div>
 
-            <div>
-                <label for="cittaArrivo">Aeroporto di Arrivo:</label>
-                <input type="text" readonly th:value="${volo.cittaArrivo}">
-            </div>
+                <div>
+                    <label for="cittaArrivo">Aeroporto di Arrivo:</label>
+                    <input type="text" readonly th:value="${volo.cittaArrivo}">
+                </div>
 
-            <div>
-                <label for="data">Data Partenza</label>
-                <input type="date" readonly th:value="${volo.giorno}">
             </div>
+            <div class="form-row">
+                <div>
+                    <label for="data">Data Partenza</label>
+                    <input type="date" readonly th:value="${volo.giorno}">
+                </div>
 
-            <div>
-                <label for="tipoAereo">Tipo Aereo</label>
-                <select id="tipoAereo" name="tipoAereo" required>
-                    <option value="">Seleziona Nuovo Aereo...</option>
-                    <option th:each="a: ${tipiAereo}" th:value="${a.tipoAereo}"
-                        th:text="${a.tipoAereo + ' (Pass: ' + a.numPass + ', Merci: ' + a.qtaMerci + ' Kg)'}"
-                        th:selected="${a.tipoAereo == volo.tipoAereo}"></option>
-                </select>
+            </div>
+            <div class="form-row">
+                <div>
+                    <label for="tipoAereo">Tipo Aereo</label>
+                    <select id="tipoAereo" name="tipoAereo" required>
+                        <option value="">Seleziona Nuovo Aereo...</option>
+                        <option th:each="a: ${tipiAereo}" th:value="${a.tipoAereo}"
+                            th:text="${a.tipoAereo + ' (Pass: ' + a.numPass + ', Merci: ' + a.qtaMerci + ' Kg)'}"
+                            th:selected="${a.tipoAereo == volo.tipoAereo}"></option>
+                    </select>
+                </div>
             </div>
 
             <div class="button-container">
