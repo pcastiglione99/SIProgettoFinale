@@ -18,6 +18,9 @@ public class AereoService {
         return aereoRepository.findAll();
     }
 
+    public List<Aereo> getTipiAereoOrdinati() {
+        return aereoRepository.findAllByOrderByTipoAereoAsc();
+    }
 
 
 }

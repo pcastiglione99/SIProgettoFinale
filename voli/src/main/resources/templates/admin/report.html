@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Admin - Report Voli</title>
+</head>
+
+<body>
+
+  <div>
+    <h1>Report Voli Futuri</h1>
+
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>ID Volo</th>
+            <th>Giorno</th>
+            <th>Partenza</th>
+            <th>Ora Part.</th>
+            <th>Arrivo</th>
+            <th>Ora Arr.</th>
+            <th>Aereo</th>
+            <th>Passeggeri</th>
+            <th>Merci (Kg)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="volo : ${voli_futuri}">
+            <td th:text="${volo.idVolo}">123</td>
+            <td th:text="${#temporals.format(volo.giorno, 'dd/MM/yyyy')}">01/01/2024</td>
+            <td th:text="${volo.cittaPartenza}">Roma</td>
+            <td th:text="${#temporals.format(volo.oraPartenza, 'HH:mm')}">10:00</td>
+            <td th:text="${volo.cittaArrivo}">Parigi</td>
+            <td th:text="${#temporals.format(volo.oraArrivo, 'HH:mm')}">12:00</td>
+            <td th:text="${volo.tipoAereo}">B737</td>
+            <td th:text="${volo.passeggeri}">12</td>
+            <td th:text="${volo.merci}">20</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</body>
+
+</html>

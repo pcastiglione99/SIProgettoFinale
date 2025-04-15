@@ -22,6 +22,9 @@ public interface VoloRepository extends JpaRepository<Volo, Integer>{
     "FROM Volo v JOIN v.aereo " +
     "WHERE v.cittaPartenza = :cittaPartenza AND v.cittaArrivo = :cittaArrivo AND v.giorno >= :giorno " +
     "ORDER BY v.giorno ASC, v.oraPartenza")
-    public List<Volo> cercaVoliAereo(String cittaPartenza, String cittaArrivo, LocalDate giorno);
+    public List<Volo> cercaVoli(String cittaPartenza, String cittaArrivo, LocalDate giorno);
+
+
+
 
 }

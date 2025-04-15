@@ -45,7 +45,7 @@ public class HomeController {
     Model model
     ) {
 
-        List<Volo> results = voloService.getAvailableFlights(cittaPartenza, cittaArrivo, data, pesoBagaglio);
+        List<Volo> results = voloService.cercaVoliDisponibili(cittaPartenza, cittaArrivo, data, pesoBagaglio);
 
         if(results.isEmpty()){
             model.addAttribute("cittaPartenza", cittaPartenza);
