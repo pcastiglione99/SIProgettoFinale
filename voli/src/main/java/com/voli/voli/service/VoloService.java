@@ -26,13 +26,16 @@ public class VoloService {
     @Autowired
     private AereoRepository aereoRepository;
 
+    /**
+     * Finds a volo by its ID.
+     *
+     * @param idVolo the ID of the volo to find
+     * @return an Optional containing the found volo, or empty if not found
+     */
     public Optional<Volo> findVoloById(Integer idVolo) {
         return voloRepository.findById(idVolo);
     }
 
-    public List<Volo> cercaVoliFuturi(LocalDate giorno) {
-        return voloRepository.cercaVoliSuccessiviGiorno(giorno);
-    }
 
     public Page<Volo> filtraVoli(LocalDate data, String partenza, String destinazione, Pageable pageable) {
         return voloRepository.findByFiltri(data, partenza, destinazione, pageable);
