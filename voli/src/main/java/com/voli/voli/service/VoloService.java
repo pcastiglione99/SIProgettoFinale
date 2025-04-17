@@ -6,6 +6,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.voli.voli.model.Aereo;
@@ -32,8 +34,8 @@ public class VoloService {
         return voloRepository.cercaVoliSuccessiviGiorno(giorno);
     }
 
-    public List<Volo> filtraVoli(LocalDate data, String partenza, String destinazione) {
-        return voloRepository.findByFiltri(data, partenza, destinazione);
+    public Page<Volo> filtraVoli(LocalDate data, String partenza, String destinazione, Pageable pageable) {
+        return voloRepository.findByFiltri(data, partenza, destinazione, pageable);
     }
 
     /**
