@@ -1,5 +1,7 @@
 package com.voli.voli.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.voli.voli.model.UtenteAdmin;
@@ -12,6 +14,6 @@ public interface UtenteAdminRepository extends JpaRepository<UtenteAdmin, Intege
      * @param username the username of the user to be found
      * @return an instance of UtenteAdmin representing the user with the given username, or null if no such user exists
      */
-    UtenteAdmin findByUsername(String username);
+    Optional<UtenteAdmin> findByUsername(String username);
 
 }

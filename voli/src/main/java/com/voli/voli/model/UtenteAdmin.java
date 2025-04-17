@@ -23,8 +23,8 @@ public class UtenteAdmin {
     @Column(name = "USERNAME", length = 50, unique = true, nullable = false)
     private String username;
 
-    @Column(name = "PASSWORD", length = 50, nullable = false)
-    private String password;
+    @Column(name = "PASSWORD_HASH", length = 255, nullable = false)
+    private String passwordHash;
 
     @Column(name = "NOME", length = 100)
     private String nome;
