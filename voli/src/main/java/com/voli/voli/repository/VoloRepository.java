@@ -12,7 +12,7 @@ import com.voli.voli.model.Volo;
 
 public interface VoloRepository extends JpaRepository<Volo, Integer> {
 
-        /*
+        /**
          * Method to find all future flights for a given day and specific city
          * 
          * @param giorno the date of the flight

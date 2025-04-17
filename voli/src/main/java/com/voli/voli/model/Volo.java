@@ -44,8 +44,16 @@ public class Volo {
     @Column(name = "TIPO_AEREO", length = 5)
     private String tipoAereo;
 
-    @ManyToOne(fetch = FetchType.LAZY) // Carica l'aereo solo quando serve
-    @JoinColumn(name = "TIPO_AEREO", referencedColumnName = "TIPO_AEREO",  insertable = false, updatable = false)
+    // The 'aereo' field is a many-to-one relationship with the 'Aereo' entity.
+    // It is lazy-loaded to improve performance by default, meaning that the 'aereo' field
+    // will not be loaded until it is accessed for the first time.
+    @ManyToOne(fetch = FetchType.LAZY)
+    // The 'JOIN_COLUMN' attribute specifies the column in the 'Volo' table that
+    // corresponds to the primary key of the 'Aereo' table.
+    // It is used to establish the relationship between the 'Volo' and 'Aereo' entities.
+    @JoinColumn(name = "TIPO_AEREO", referencedColumnName = "TIPO_AEREO", insertable = false, updatable = false)
+    // The 'insertable' and 'updatable' attributes specify that the 'aereo'
+    // field should not be inserted or updated in the database.
     private Aereo aereo;
 
     @Column(name = "PASSEGGERI")
