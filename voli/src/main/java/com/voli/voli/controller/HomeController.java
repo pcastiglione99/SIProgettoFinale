@@ -27,7 +27,6 @@ public class HomeController {
     public String home(Model model) {
         List<Aeroporto> aeroporti = aeroportoService.getAeroportiOrdinati();
         model.addAttribute("aeroporti", aeroporti);
-        model.addAttribute("today", LocalDate.now());
         return "home";
     }
 

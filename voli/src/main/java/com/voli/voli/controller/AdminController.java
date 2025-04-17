@@ -50,6 +50,10 @@ public class AdminController {
         Pageable pageable = PageRequest.of(page, size);
 
         Page<Volo> voliFuturi = voloService.filtraVoli(data, cittaPartenza, cittaArrivo, pageable);
+        model.addAttribute("data", data);
+        model.addAttribute("cittaPartenza", cittaPartenza);
+        model.addAttribute("cittaArrivo", cittaArrivo);
+
         model.addAttribute("aeroporti", aeroportoService.getAeroportiOrdinati());
         model.addAttribute("voliFuturi", voliFuturi);
         model.addAttribute("paginaCorrente", page);
