@@ -66,6 +66,8 @@ public class VoloService {
     @Transactional
     public void aggiungiVolo(Volo nuovoVolo) {
 
+        if( nuovoVolo.getOraPartenza().isAfter(nuovoVolo.getOraArrivo())) return;
+
         nuovoVolo.setPasseggeri(0);
         nuovoVolo.setMerci(0);
 

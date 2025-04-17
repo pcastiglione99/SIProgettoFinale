@@ -78,7 +78,6 @@ public class AdminController {
 
     @PostMapping("/voli/cancella/{id:\\d+}")
     public String cancellaVolo(@PathVariable("id") Integer idVolo) {
-        System.out.println(idVolo);
 
         voloService.cancellaVolo(idVolo);
 
