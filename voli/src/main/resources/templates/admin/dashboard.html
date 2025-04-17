@@ -17,8 +17,7 @@
     </ul>
   </nav>
 
-  <h1 class="title" th:text="'Benvenuto ' + ${username}"></h1>
-
+  <h1 class="title"> Benvenuto <strong sec:authentication="name">NomeUtente</strong> </h1>'
   <div class="container link-container">
     <a th:href="@{/admin/voli/report}" class="link-box">
       Visualizza Report Voli Futuri

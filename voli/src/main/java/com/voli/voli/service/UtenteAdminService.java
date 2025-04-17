@@ -37,7 +37,7 @@ public class UtenteAdminService implements UserDetailsService {
         .orElseThrow(() -> new UsernameNotFoundException("Utente non trovato"));
 
         return new User(
-                utente.getUsername(),
+                utente.getNome(),
                 utente.getPasswordHash(),
                 Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN")));
     }
