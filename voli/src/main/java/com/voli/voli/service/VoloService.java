@@ -36,6 +36,16 @@ public class VoloService {
         return voloRepository.findByFiltri(data, partenza, destinazione);
     }
 
+    /**
+     * Cerca i voli disponibili dalla città di partenza alla città di arrivo
+     * nel giorno specificato con un peso di bagaglio compreso.
+     *
+     * @param cittaPartenza la città di partenza del volo
+     * @param cittaArrivo   la città di arrivo del volo
+     * @param giorno        il giorno del volo
+     * @param pesoBagaglio  il peso del bagaglio
+     * @return una lista di voli disponibili che soddisfano i criteri specificati
+     */
     public List<Volo> cercaVoliDisponibili(String cittaPartenza, String cittaArrivo, LocalDate giorno,
             int pesoBagaglio) {
 
@@ -52,7 +62,6 @@ public class VoloService {
                     return postiOk && bagaglioOk;
                 })
                 .collect(Collectors.toList());
-
     }
 
     @Transactional
