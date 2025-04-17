@@ -1,7 +1,6 @@
 package com.voli.voli.controller;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -39,31 +38,18 @@ public class AdminController {
         return "admin/dashboard";
     }
 
-    /*
-     * @GetMapping("/voli/report")
-     * public String getFutureFlights(
-     * Model model,
-     * 
-     * @RequestParam(defaultValue = "2017-01-01", name = "data") LocalDate data) {
-     * // LocalDate oggi = LocalDate.now();
-     * List<Volo> voliFuturi = voloService.cercaVoliFuturi(data);
-     * model.addAttribute("voliFuturi", voliFuturi);
-     * return "admin/report";
-     * }
-     */
-
     @GetMapping("/voli/report")
     public String getFutureFlights(
             Model model,
             @RequestParam(name = "data", required = false) LocalDate data,
-            @RequestParam(name = "cittaPartenza", required = false) String partenza,
-            @RequestParam(name = "cittaArrivo", required = false) String destinazione,
+            @RequestParam(name = "cittaPartenza", required = false) String cittaPartenza,
+            @RequestParam(name = "cittaArrivo", required = false) String cittaArrivo,
             @RequestParam(name = "page", defaultValue = "0") int page,
             @RequestParam(name = "size", defaultValue = "10") int size) {
 
         Pageable pageable = PageRequest.of(page, size);
 
-        Page<Volo> voliFuturi = voloService.filtraVoli(data, partenza, destinazione, pageable);
+        Page<Volo> voliFuturi = voloService.filtraVoli(data, cittaPartenza, cittaArrivo, pageable);
         model.addAttribute("aeroporti", aeroportoService.getAeroportiOrdinati());
         model.addAttribute("voliFuturi", voliFuturi);
         model.addAttribute("paginaCorrente", page);
@@ -97,24 +83,21 @@ public class AdminController {
 
     @GetMapping("/voli/modifica/{id:\\d+}")
     public String modificaVoloForm(@PathVariable("id") Integer idVolo, Model model) {
-        Optional<Volo> voloOpt = voloService.findVoloById(idVolo);
-        if (voloOpt.isPresent()) {
-            model.addAttribute("volo", voloOpt.get());
-            model.addAttribute("tipiAereo", aereoService.getTipiAereoOrdinati());
-            model.addAttribute("isModifica", true);
-            return "/admin/volo_form";
-        }
-        return "redirect:/admin/voli/report";
+        
+        return voloService.findVoloById(idVolo).
+            map(volo -> {
+                model.addAttribute("volo", volo);
+                model.addAttribute("tipiAereo", aereoService.getTipiAereoOrdinati());
+                model.addAttribute("isModifica", true);
+                return "/admin/volo_form";
+            })
+            .orElse("redirect:/admin/voli/report");
     }
 
     @PostMapping("/voli/modifica")
-    public String modificaVolo(@RequestParam("idVolo") Integer idVolo,
-            @RequestParam("tipoAereo") String nuovoTipoAereo) {
-        System.out.println(idVolo);
-        System.out.println(nuovoTipoAereo);
-        boolean esito = voloService.modificaTipoAereo(idVolo, nuovoTipoAereo);
-        System.out.println(esito);
+    public String modificaVolo(@RequestParam("idVolo") Integer idVolo, @RequestParam("tipoAereo") String nuovoTipoAereo) {
 
+        if(voloService.modificaTipoAereo(idVolo, nuovoTipoAereo));       
         return "redirect:/admin/voli/report";
 
     }

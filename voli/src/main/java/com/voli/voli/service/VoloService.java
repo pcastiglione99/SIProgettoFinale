@@ -36,7 +36,6 @@ public class VoloService {
         return voloRepository.findById(idVolo);
     }
 
-
     public Page<Volo> filtraVoli(LocalDate data, String partenza, String destinazione, Pageable pageable) {
         return voloRepository.findByFiltri(data, partenza, destinazione, pageable);
     }
@@ -54,17 +53,12 @@ public class VoloService {
     public List<Volo> cercaVoliDisponibili(String cittaPartenza, String cittaArrivo, LocalDate giorno,
             int pesoBagaglio) {
 
-        List<Volo> results = voloRepository.cercaVoli(cittaPartenza, cittaArrivo, giorno);
-
-        return results.stream()
+        return voloRepository.cercaVoli(cittaPartenza, cittaArrivo, giorno).stream()
                 .filter(volo -> {
                     Aereo aereo = volo.getAereo();
-                    if (aereo == null)
-                        return false; // Sicurezza: se aereo non trovato, scarta
-
-                    boolean postiOk = volo.getPasseggeri() < aereo.getNumPass();
-                    boolean bagaglioOk = (volo.getMerci() + pesoBagaglio) <= aereo.getQtaMerci();
-                    return postiOk && bagaglioOk;
+                    return aereo != null &&
+                    volo.getPasseggeri() < aereo.getNumPass() &&
+                    (volo.getMerci() + pesoBagaglio) <= aereo.getQtaMerci();
                 })
                 .collect(Collectors.toList());
     }
@@ -80,8 +74,8 @@ public class VoloService {
     }
 
     @Transactional
-    public boolean modificaTipoAereo(int idAereo, String nuovoTipoAereo) {
-        Optional<Volo> voloOpt = voloRepository.findById(idAereo);
+    public boolean modificaTipoAereo(int idVolo, String nuovoTipoAereo) {
+        Optional<Volo> voloOpt = voloRepository.findById(idVolo);
         Optional<Aereo> aereoOpt = aereoRepository.findById(nuovoTipoAereo);
 
         if (voloOpt.isPresent() && aereoOpt.isPresent()) {
